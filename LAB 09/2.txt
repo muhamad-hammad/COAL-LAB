@@ -1,0 +1,22 @@
+;Task#2
+;Give an assembly language program to move -128 in ax and expand eax. Using shift and rotate
+;instruction.
+
+INCLUDE Irvine32.inc
+.data
+.code
+main PROC
+    mov eax, 0
+    call dumpregs
+    mov ax, -128
+    call dumpregs
+    shl eax, 16
+    call dumpregs
+    sar eax, 16
+    call dumpregs
+    EXIT
+main ENDP
+END main
+
+
+    

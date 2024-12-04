@@ -1,0 +1,41 @@
+;Task#5
+;Write a program for sequential search. Take an input from the user and find if it occurs in
+;the following array:
+;arr WORD 10, 4, 7, 14, 299, 156, 3, 19, 29, 300, 20
+
+INCLUDE Irvine32.inc
+.data
+         arr     WORD 10, 4, 7, 14, 299, 156, 3, 19, 29, 300, 20
+         arr2    WORD 11 DUP(?)
+         prompt1 BYTE "Enter the number to search from this array (10, 4, 7, 14, 299, 156, 3, 19, 29, 300, 20): ", 0
+         prompt2 BYTE "Number not found in the sequence!", 0
+         prompt3 BYTE "Number found in the sequence", 0
+
+.code
+main PROC
+          mov   ecx, 11
+          mov   edx, OFFSET prompt1
+          call  writestring
+          call  readint
+          call  crlf
+          
+          mov   esi, OFFSET arr
+    L:    
+          movzx ebx, WORD PTR [esi]
+          cmp   eax, ebx
+          JE    found
+          ADD   esi, 2
+          loop  L
+
+          mov   edx, OFFSET prompt2
+          call  writestring
+          jmp   ex
+
+    found:
+          mov   edx, OFFSET prompt3
+          call  writestring
+
+    ex:   
+          EXIT
+main ENDP
+END main

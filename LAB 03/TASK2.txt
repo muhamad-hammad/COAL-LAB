@@ -1,0 +1,15 @@
+INCLUDE Irvine32.inc
+
+.data
+value0 SDWORD ?
+
+.code
+main PROC
+    mov value0,  -2147483648
+	mov eax, value0
+    call Writeint
+    call Crlf
+
+    exit
+main ENDP
+END main

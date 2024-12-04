@@ -1,0 +1,43 @@
+include irvine32.inc
+
+.data
+var1 DWORD 3
+var2 DWORD 4
+var3 DWORD 5
+
+.code
+
+ThreeProd PROC
+push ebp
+mov ebp,esp
+mov eax, [ebp+8]
+mov ebx,[ebp+12]
+mul ebx
+mov ebx,[ebp+16]
+mul ebx
+
+call writeint
+pop ebp
+comment!
+    push EBP
+    mov EBP, ESP
+    mov eax,DWORD PTR [EBP + 12]
+    mov ebx,DWORD PTR [EBP + 8]
+    mul ebx
+    mov ebx,DWORD PTR [EBP + 4]
+    mul ebx
+    call WriteInt
+    pop EBP!
+    ret
+ThreeProd ENDP
+
+main PROC
+    push var3
+    push var2
+    push var1
+    call ThreeProd
+    Exit
+main ENDP
+
+END main
+

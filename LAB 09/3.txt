@@ -1,0 +1,50 @@
+ ;Task#3
+;Write a series of instructions that shift the lowest bit of AX into the highest bit of BX without using
+;the SHRD instruction. Next, perform the same operation using SHRD.
+
+INCLUDE Irvine32.inc
+.data
+
+.code
+main PROC
+    mov eax, 0
+    mov ebx, 0
+    call writebin
+    mov ecx, eax
+    mov eax, ebx
+    call crlf
+    call writebin
+    mov eax, ecx
+    call crlf
+    call crlf
+
+    mov eax, 1111111111111111b
+    mov ebx, 0000000000000000b
+    call writebin
+    call crlf
+    mov ecx, eax
+    mov eax, ebx
+    call writebin
+    call crlf
+    mov eax, ecx
+    call crlf
+
+
+
+    ror ax, 1
+    rcr bx, 1
+
+
+
+    call writebin
+    call crlf
+    mov ecx, eax
+    mov eax, ebx
+    call writebin
+    call crlf
+    mov eax, ecx
+    call crlf
+
+    EXIT
+main ENDP
+END main

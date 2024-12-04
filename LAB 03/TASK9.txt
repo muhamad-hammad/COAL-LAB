@@ -1,0 +1,17 @@
+INCLUDE Irvine32.inc
+
+.data
+dArray BYTE 500 DUP ("TEST", )
+
+.code
+main PROC
+
+    mov edx, 0
+    mov edx, OFFSET dArray
+    call writeString
+    call Crlf
+
+
+    exit
+main ENDP
+END main

@@ -1,0 +1,54 @@
+CPP:
+#include <stdio.h>
+
+extern "C" void GCD();
+
+int main()
+{
+	int num1, num2, rslt;
+
+	printf("Enter two numbers: ");
+	scanf_s("%d %d", &num1, &num2);
+
+	_asm
+	{
+		mov eax, num1
+		mov ebx, num2
+
+		call GCD
+
+		mov rslt, eax
+	}
+
+	printf("\nSource result = %d\n\n", rslt);
+	return 0;
+
+}
+
+
+ASM:
+#include <stdio.h>
+
+extern "C" void GCD();
+
+int main()
+{
+	int num1, num2, rslt;
+
+	printf("Enter two numbers: ");
+	scanf_s("%d %d", &num1, &num2);
+
+	_asm
+	{
+		mov eax, num1
+		mov ebx, num2
+
+		call GCD
+
+		mov rslt, eax
+	}
+
+	printf("\nSource result = %d\n\n", rslt);
+	return 0;
+
+}

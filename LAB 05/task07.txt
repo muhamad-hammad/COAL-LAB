@@ -1,0 +1,40 @@
+INCLUDE Irvine32.inc
+
+.data
+arrayB BYTE 60, 70, 80
+arrayW WORD 150, 250, 350
+arrayD DWORD 600, 1200, 1800
+SUM1 DWORD 0
+SUM2 DWORD 0
+SUM3 DWORD 0
+
+.code
+main PROC
+    mov esi, OFFSET arrayB
+    movzx eax, BYTE PTR [esi]
+    movzx ebx, BYTE PTR [esi + 1]
+    add eax, ebx
+    mov SUM1, eax
+    call WriteInt
+    call crlf
+
+    mov esi, OFFSET arrayW
+    movzx eax, WORD PTR [esi]
+    movzx ebx, WORD PTR [esi + 2]
+    add eax, ebx
+    mov SUM2, eax
+    call WriteInt
+    call crlf
+
+    mov esi, OFFSET arrayD
+    mov eax, [esi]
+    mov ebx, [esi + 4]
+    add eax, ebx
+    mov SUM3, eax
+    
+    call WriteInt
+    call crlf
+
+    exit
+main ENDP
+END main

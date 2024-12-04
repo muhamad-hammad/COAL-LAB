@@ -1,0 +1,59 @@
+;Write a program that takes four input integers from the user. 
+;Then compare and display a message whether these integers 
+;are equal or not.
+
+INCLUDE Irvine32.inc
+.data
+prompt1 BYTE "Enter 4 integers: " , 0
+prompt2 BYTE "The integers are equal: ", 0
+prompt3 BYTE "The integers are not equal: " ,0
+one DWORD ?
+two DWORD ?
+three DWORD ?
+four DWORD ?
+.code
+
+main PROC
+    mov edx, OFFSET prompt1
+    call writestring
+    call crlf
+    mov edx, 0
+    call readint
+    mov one, edx
+    
+    mov edx, 0
+    call readint
+    mov two, edx
+    
+    mov edx, 0
+    call readint
+    mov three, edx
+    
+    mov edx, 0
+    call readint
+    mov four, edx
+    
+    mov edx, one
+    cmp edx, two
+    JNE ex
+    mov edx, two
+    cmp edx, three
+    JNE ex
+    mov edx, three
+    cmp edx, four
+    JNE ex
+    mov edx, OFFSET prompt2
+    call writestring
+    jmp done
+
+
+
+ex: 
+    mov edx, OFFSET prompt3
+    call writestring
+done:
+    EXIT
+main ENDP
+END main
+
+

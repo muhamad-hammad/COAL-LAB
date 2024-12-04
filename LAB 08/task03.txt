@@ -1,0 +1,45 @@
+;Task#3 Implement the following given code in Assembly and Consider 
+;var = 5 , edx = var+1 and counter value from array initialized in task#2.
+;if ( var < ecx ) AND (ecx >= edx) then
+;x = 0
+;else
+;x = 1
+
+INCLUDE Irvine32.inc
+.data
+
+prompt1 BYTE "value of X is: ", 0
+intArr SWORD 0, 0, 0, 150, 120, 35, -12, 66, 4, 0
+var DWORD 5
+X DWORD ?
+
+.code
+main PROC
+    mov cx, LENGTHOF intArr
+
+    L:  
+        mov edx, var
+        inc edx
+        cmp var, ecx
+        JGE notzero
+        cmp ecx, edx
+        JNGE notzero
+        mov edx, OFFSET prompt1
+        mov eax, 0
+        call writestring
+        call writedec
+        call crlf
+        jmp ex
+
+
+notzero:
+    mov eax, 1
+    mov edx, OFFSET prompt1
+    call writestring
+    call writedec
+    call crlf
+
+ex:
+    EXIT
+main ENDP
+END main

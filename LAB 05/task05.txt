@@ -1,0 +1,37 @@
+INCLUDE Irvine32.inc
+
+.data
+    arrayB BYTE 10, 20 ,30, 40
+    arrayT BYTE 4 DUP(?)
+
+.code
+main PROC
+
+    mov al, arrayB+3
+    mov arrayT, al
+    movzx eax, arrayT
+    call writeint
+    call crlf
+
+    mov al, arrayB+2
+    mov arrayT+1, al
+    movzx eax, arrayT+1
+    call writeint
+    call crlf
+
+    mov al, arrayB+1
+    mov arrayT+2, al
+    movzx eax, arrayT+2
+    call writeint
+    call crlf
+
+    mov al, arrayB
+    mov arrayT+3, al
+    movzx eax, arrayT+3
+    call writeint
+    call crlf
+
+    exit
+main ENDP
+END main
+

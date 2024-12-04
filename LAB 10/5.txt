@@ -1,0 +1,105 @@
+include irvine32.inc
+
+.data
+         prompt1 BYTE "Enter number: ", 0
+         prompt2 BYTE "Not all are prime.", 0
+         prompt3 BYTE "The largest prime number is: ", 0
+         nums    DWORD 4 DUP(0)
+
+.code
+main PROC
+                  mov  ecx, 4
+                  mov  esi, OFFSET nums
+
+    Iloop:        
+                  mov  edx, OFFSET prompt1
+                  call writestring
+                  call readint
+                  mov  [esi], eax
+                  add  esi, 4
+                  loop Iloop
+
+                  mov  ecx, 4
+                  mov  esi, OFFSET nums
+
+    checkp:       
+                  mov  eax, [esi]
+                  call CheckPrime
+                  cmp  eax, 0
+                  je   notp
+                  add  esi, 4
+                  loop checkp
+
+                  call LargestPrime
+                  exit
+
+    notp:         
+                  mov  edx, OFFSET prompt2
+                  call writestring
+                  call crlf
+                  exit
+main ENDP
+
+CheckPrime PROC
+                  mov  ebx, eax
+                  cmp  ebx, 2
+                  je   isprime
+                  cmp  ebx, 1
+                  jle  isnotprime
+                  mov  ecx, 2
+
+    check_loop:   
+                  mov  eax, ebx
+                  cdq
+                  div  ecx
+                  cmp  edx, 0
+                  je   isnotprime
+                  inc  ecx
+                  mov  eax, ecx
+                  mul  eax
+                  cmp  eax, ebx
+                  jb   check_loop
+
+    isprime:      
+                  mov  eax, 1
+                  ret
+
+    isnotprime:   
+                  mov  eax, 0
+                  ret
+CheckPrime ENDP
+
+LargestPrime PROC
+                  mov  ecx, 4
+                  mov  esi, OFFSET nums
+                  mov  eax, 0
+
+    findlargest:  
+                  mov  ebx, [esi]
+                  call CheckPrime
+                  cmp  eax, 1
+                  jne  skip
+                  cmp  ebx, eax
+                  jle  skip
+                  mov  eax, ebx
+
+    skip:         
+                  add  esi, 4
+                  loop findlargest
+
+                  cmp  eax, 0
+                  je   primeNotfound
+                  mov  edx, OFFSET prompt3
+                  call writestring
+                  call writeint
+                  call crlf
+                  ret
+
+    primeNotfound:
+                  mov  edx, OFFSET prompt2
+                  call writestring
+                  call crlf
+                  ret
+LargestPrime ENDP
+
+end main

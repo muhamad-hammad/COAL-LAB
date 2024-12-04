@@ -1,0 +1,35 @@
+include irvine32.inc
+
+.data
+         prompt1 BYTE "Enter number: ", 0
+         prompt2 BYTE "The square is: ", 0
+
+.code
+main PROC
+           call  Square
+           exit
+main ENDP
+
+Square PROC
+           enter 4, 0
+
+           mov   edx, OFFSET prompt1
+           call  writestring
+
+           call  readint
+           mov   [ebp - 4], eax
+
+           mov   eax, [ebp - 4]
+           imul  eax, eax
+
+           mov   edx, OFFSET prompt2
+           call  writestring
+
+           call  writedec
+           call  crlf
+
+           leave
+           ret
+Square ENDP
+
+END main

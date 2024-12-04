@@ -1,0 +1,36 @@
+;Task#5
+;Create a procedure Extended_Add procedure to add two 64-bit (8-byte) integers.
+INCLUDE Irvine32.inc
+.data
+
+num1l   DWORD 12345678h    ; using hexadecimal values
+num1h   DWORD 00000001h
+num2l   DWORD 87654321h
+num2h   DWORD 00000002h
+resl    DWORD ?
+resh    DWORD ?
+
+.code
+Extended_Add PROC
+    mov eax, num1l
+    add eax, num2l
+    mov resl, eax
+
+    mov eax, num1h
+    adc eax, num2h
+    mov resh, eax
+
+    ret
+Extended_Add ENDP
+
+main PROC
+    call Extended_Add
+
+    mov eax, resh
+    call WriteHex
+    mov eax, resl
+    call WriteHex
+
+    EXIT
+main ENDP
+END main

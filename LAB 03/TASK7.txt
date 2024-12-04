@@ -1,0 +1,23 @@
+INCLUDE Irvine32.inc
+
+.data
+wArray WORD 1111, 2222, 3333
+
+.code
+main PROC
+    mov ax, wArray
+    movzx eax, ax
+    call WriteInt
+    call Crlf
+    mov ax, wArray[2]
+    movzx eax, ax
+    call WriteInt
+    call Crlf
+    mov ax, wArray[4]
+    movzx eax, ax
+    call WriteInt
+    call Crlf
+
+    exit
+main ENDP
+END main

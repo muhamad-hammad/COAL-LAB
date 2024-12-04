@@ -1,0 +1,16 @@
+INCLUDE Irvine32.inc
+
+.data
+bArray BYTE 20 DUP (0)
+
+.code
+main PROC
+    
+    mov al, bArray
+    movzx eax , al
+    call WriteInt
+    call Crlf
+
+    exit
+main ENDP
+END main

@@ -1,0 +1,39 @@
+INCLUDE Irvine32.inc
+.data
+array1 WORD  1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+array2 WORD 11 DUP(?)
+.code
+main PROC
+	mov eax, 0
+    mov ecx, 11
+    mov esi, 20
+
+	
+L1:
+    push array1[esi]
+    sub esi, 2
+    loop L1
+
+    mov ecx, 10
+    mov esi, 0
+
+L2:
+    pop array2[esi]
+    add esi, 2
+    loop L2
+
+    mov ecx, 10
+    mov esi, 0
+
+L5:
+    mov ax, array2[esi]
+    call WriteInt
+    call Crlf
+    add esi, 2
+    loop L5
+
+    EXIT
+main ENDP
+END main
+
+

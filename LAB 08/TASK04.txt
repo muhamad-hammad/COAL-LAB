@@ -1,0 +1,41 @@
+;Task#4 Implement the following given code in Assembly and consider var = 0.
+;while ( var <= 10)
+;if (var < 5)
+;Print “Hello”
+;else
+;Print “World”
+;var = var + 1
+;end while
+
+INCLUDE Irvine32.inc
+.data
+prompt1 BYTE "Hello" , 0
+prompt2 BYTE "World" , 0
+var DWORD 0
+
+
+.code
+main PROC
+mov ecx, 0
+again:
+    cmp var, 10
+    JE ex
+    cmp var, 5
+    JGE hello
+    mov edx, OFFSET prompt2
+    call writestring
+    call crlf
+    inc var
+    jmp again
+    
+hello:
+    mov edx, OFFSET prompt1
+    call writestring
+    call crlf
+    inc var
+    jmp again
+
+ex:
+    EXIT
+main ENDP
+END main

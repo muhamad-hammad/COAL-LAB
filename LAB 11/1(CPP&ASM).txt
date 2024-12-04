@@ -1,0 +1,49 @@
+CPP:
+#include <stdio.h>
+
+extern "C" void ThreeProd();
+
+int main()
+{
+	int num1, num2, num3, rslt;
+
+	printf("Enter three numbers: ");
+	scanf_s("%d %d %d", &num1, &num2, &num3);
+
+	_asm
+	{
+		mov eax,num1
+		mov ebx,num2
+		mov ecx, num3
+		
+		call ThreeProd
+
+		mov rslt, eax ; Store result from eax into rslt
+	}
+
+	printf("\nSource result = %d\n\n", rslt);
+	return 0;
+}
+
+
+
+
+ASM:
+.686
+.MODEL FLAT, C
+.STACK 2048
+.DATA
+.CODE
+
+ThreeProd PROC
+comment!
+    pop ecx
+    pop ebx
+    pop eax!
+
+    imul eax, ebx
+    imul eax, ecx
+    ret 
+ThreeProd ENDP
+
+END

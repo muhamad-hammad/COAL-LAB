@@ -1,0 +1,54 @@
+;Write a program to check whether a character is alphabet or not.
+
+INCLUDE Irvine32.inc
+.data
+prompt1 BYTE "Enter the character: ", 0
+prompt2 BYTE " is alphabet", 0
+prompt3 BYTE " is not alphabet", 0
+
+.code
+main PROC
+    mov edx, OFFSET prompt1
+    call writestring
+    call readchar
+    call crlf
+    call writechar
+
+    ;checking for upper case
+    cmp al, 'A'
+    JL lower
+    cmp al, 'Z'
+    JG lower
+    jmp alphabet
+    
+lower:;checking for lower case
+    cmp al, 'a'
+    JL notalphabet
+    cmp al, 'z'
+    JG notalphabet
+    jmp alphabet
+    
+
+    ;checking for upper case
+    cmp al, 'A'
+    JL notalphabet
+    cmp al, 'Z'
+    JG notalphabet
+    jmp alphabet
+
+
+alphabet:
+    mov edx, OFFSET prompt2
+    call writestring
+    jmp ex
+
+notalphabet:
+    mov edx, OFFSET prompt3
+    call writestring
+    jmp ex
+
+
+    ex:
+        EXIT
+main ENDP
+END main

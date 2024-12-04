@@ -1,0 +1,26 @@
+INCLUDE Irvine32.inc
+.data
+prompt1 BYTE "Enter the number to which you want sum of: 1 to n :",0
+.code
+
+asknum PROC
+	mov edx, OFFSET prompt1
+	call writeString
+	call readint
+	mov ecx, eax
+	mov eax, 0
+	L:
+		add eax, ecx
+	loop L
+
+	ret
+asknum ENDP
+
+main PROC
+	call asknum
+    call WriteInt
+    call Crlf
+
+    EXIT
+main ENDP
+END main

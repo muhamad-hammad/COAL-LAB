@@ -1,0 +1,28 @@
+include irvine32.inc
+
+.data
+type BYTE "Coppied Successfully" , 0
+target BYTE 20 DUP(?)
+
+.Code
+
+MAIN PROC 
+    mov esi, OFFSET type
+    mov edi, OFFSET target
+
+copy:
+    mov al, [esi]
+    mov [edi], al
+    cmp al, 0
+    je Copied
+    inc esi
+    inc edi
+jmp copy
+Copied:
+    mov edx, OFFSET target
+    call WriteString
+    call crlf
+
+EXIT
+MAIN ENDP
+END MAIN

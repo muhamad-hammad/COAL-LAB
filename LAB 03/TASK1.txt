@@ -1,0 +1,15 @@
+INCLUDE Irvine32.inc
+
+.data
+value0 WORD ?
+value1 SBYTE -11
+
+.code
+main PROC
+    movsx eax,  value1
+    call Writeint
+    call Crlf
+
+    exit
+main ENDP
+END main

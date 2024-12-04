@@ -1,0 +1,18 @@
+INCLUDE Irvine32.inc
+
+.data
+    val1 DWORD 8000
+
+.code
+main PROC
+    mov eax, 0
+    mov ebx, 1
+
+    mov eax, val1
+    add eax, ebx
+    call DUMPREGS
+    call crlf
+
+   exit
+main endp
+end main

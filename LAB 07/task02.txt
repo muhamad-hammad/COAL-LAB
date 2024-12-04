@@ -1,0 +1,27 @@
+INCLUDE Irvine32.inc
+.data
+.code
+main PROC
+	mov eax, 0
+    mov ecx, 3
+
+	
+L1:
+	mov ebx, ecx
+    push ebx
+    loop L1
+
+    mov ecx, 3
+	mov edx, 0
+L2:
+    pop edx
+    add eax,edx 
+    loop L2
+
+    call WriteInt
+    call Crlf
+
+    EXIT
+main ENDP
+END main
+

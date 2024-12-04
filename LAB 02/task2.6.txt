@@ -1,0 +1,25 @@
+INCLUDE Irvine32.inc
+
+.code
+main PROC
+    ;assuming the values for some registers(eax=3) ; eax = 5ADh – ebx + 65o + 65d – 11110111 + 150
+    mov ebx, 3
+    mov eax, 5ADh
+    sub eax, ebx
+    mov ecx, 65o
+    add eax, ecx
+    mov ebx, 65d
+    add eax, ebx
+    mov ecx, 65d
+    add eax, ecx
+    mov ebx, 11110111
+    sub eax, ebx
+    mov ecx, 150
+    add eax, ecx
+
+    call WriteInt
+    call Crlf
+    exit
+main ENDP
+
+END main

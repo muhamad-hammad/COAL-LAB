@@ -1,0 +1,47 @@
+INCLUDE Irvine32.inc
+
+.data
+color BYTE "Blue", 0
+A WORD 12
+B WORD 2
+cC WORD 13
+D WORD 8
+E WORD 14
+
+.code
+main PROC 
+	mov edx, OFFSET color
+    call WriteString
+    call Crlf
+
+	movzx eax, A
+    call WriteInt
+    call Crlf
+
+
+	movzx eax, B
+    call WriteInt
+    call Crlf
+
+
+	movzx eax, Cc
+    call WriteInt
+    call Crlf
+
+
+	movzx eax, D
+    call WriteInt
+    call Crlf
+
+
+	movzx eax, E
+    call WriteInt
+    call Crlf
+
+
+
+    exit
+main ENDP
+END main
+
+

@@ -1,0 +1,30 @@
+;Task#1
+;Write ASM instructions that calculate EAX * 21 using binary multiplication.
+;Hint: 21 = 2^4 + 2^2 + 2^0
+
+
+INCLUDE Irvine32.inc
+.data
+.code
+main PROC
+    mov eax, 1
+    mov ebx, eax
+    
+    shl eax, 4
+    mov ecx, eax
+    
+    mov eax, ebx
+    shl eax, 2
+    add ebx, eax
+    add ebx, ecx
+
+    mov eax, ebx
+    call writeint
+    call crlf
+
+    EXIT
+main ENDP
+END main
+
+
+    

@@ -1,0 +1,14 @@
+INCLUDE Irvine32.inc
+
+.data
+value0 WORD 1111, 2222, 3333
+
+.code
+main PROC 
+	movzx eax, value0
+    call Writeint
+    call Crlf
+
+    exit
+main ENDP
+END main

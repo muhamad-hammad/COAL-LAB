@@ -1,0 +1,23 @@
+INCLUDE Irvine32.inc
+
+.code
+main PROC
+    mov eax, 10001101b
+    mov ebx, 0D83h
+    sub eax, ebx
+    mov ecx, 385d
+    add eax, ecx
+    mov ebx, 10d
+    add eax, ebx
+    mov ecx, 1111101b
+    add eax, ecx
+    mov ebx, 0Eh
+    sub eax, ebx
+    mov ecx, 0Fh
+    add eax, ecx
+    call WriteInt
+    call Crlf
+    exit
+main ENDP
+
+END main

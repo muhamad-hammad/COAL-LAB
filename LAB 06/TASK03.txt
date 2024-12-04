@@ -1,0 +1,89 @@
+INCLUDE Irvine32.inc
+
+.data
+    nameArray BYTE 5 DUP(20 DUP(?))    
+    idArray DWORD 5 DUP(?)             
+    yobArray DWORD 5 DUP(?)            
+    salaryArray DWORD 5 DUP(?)         
+    totalSalary DWORD 0                
+
+    promptName BYTE "Enter name:", 0     
+    promptID BYTE "Enter Employee ID:", 0
+    promptYOB BYTE "Enter Year of Birth:", 0
+    promptSalary BYTE "Enter Monthly Salary:", 0
+    newline BYTE 0Dh, 0Ah, 0            
+
+.code
+main PROC
+    mov ebx, 5               
+    mov ecx, 5               
+    mov esi, offset nameArray
+
+label1:
+    mov edx, offset promptName
+    call WriteString
+    mov edx, esi              
+    mov ecx, 20               
+    call ReadString
+    add esi, 20               
+
+    mov edx, offset promptID
+    call WriteString
+    call ReadInt
+    mov idArray[ebx * 4 - 4], eax  
+
+    mov edx, offset promptYOB
+    call WriteString
+    call ReadInt
+    mov yobArray[ebx * 4 - 4], eax  
+
+    mov edx, offset promptSalary
+    call WriteString
+    call ReadInt
+    mov salaryArray[ebx * 4 - 4], eax 
+
+    dec ebx
+    jnz label1              
+
+    mov ebx, 5
+    mov esi, offset nameArray
+
+label2:
+    mov edx, esi
+    call WriteString
+    call Crlf
+
+    mov edx, offset newline
+    call WriteString
+
+    ; Display Employee ID
+    mov eax, idArray[ebx * 4 - 4]
+    call WriteInt
+    call Crlf
+
+    ; Display Year of Birth
+    mov eax, yobArray[ebx * 4 - 4]
+    call WriteInt
+    call Crlf
+
+    ; Calculate and display Annual Salary
+    mov eax, salaryArray[ebx * 4 - 4]
+    mov edx, 12                
+    mul edx
+    add totalSalary, eax        
+    call WriteInt
+    call Crlf
+
+    add esi, 20
+    dec ebx
+    jnz label2
+
+    mov edx, offset newline
+    call WriteString
+    mov eax, totalSalary
+    call WriteInt
+    call Crlf
+
+    exit
+main ENDP
+END main

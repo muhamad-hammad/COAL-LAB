@@ -1,0 +1,29 @@
+INCLUDE Irvine32.inc
+.data
+prompt1 BYTE "First non-zero value found: ", 0
+intArr SWORD 0, 0, 0, 150, 120, 35, -12, 66, 4, 0
+
+.code
+main PROC
+    mov esi, OFFSET intArr
+    mov cx, LENGTHOF intArr
+    mov eax, 0
+
+L:
+    mov ax, [esi]
+    cmp ax, 0
+    JNZ found
+    add esi, 2
+    loop L
+    jmp done
+
+found:
+    mov edx, OFFSET prompt1
+    call writestring
+    
+    call writeint
+
+done:
+    EXIT
+main ENDP
+END main

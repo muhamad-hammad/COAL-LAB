@@ -1,0 +1,70 @@
+;2. Write a program which contains a procedure named MinMaxArray that displays the
+;minimum & maximum values in an array. Pass a size-20 array by reference to this
+;procedure.
+
+include irvine32.inc
+
+.data
+    arr DWORD 5, 23, 8, 11, 42, 3, 16, 9, 27, 6, 12, 35, 18, 7, 4, 19, 30, 10, 25, 2
+    ASize DWORD 20
+    prompt1 BYTE "Min: ", 0
+    prompt2 BYTE "Max: ", 0
+
+.code
+main PROC
+    push ASize
+    push OFFSET arr
+    call MinMaxArray
+    exit
+main ENDP
+
+MinMaxArray PROC
+    push ebp
+    mov  ebp, esp
+    pushad
+
+    mov  esi, [ebp + 8]  
+    mov  ecx, [ebp + 12]
+    mov  eax, [esi]     
+    mov  ebx, [esi]    
+
+    add  esi, 4       
+    dec  ecx            
+
+L1:
+    mov  edx, [esi]      
+    cmp  edx, eax       
+    jl   updateMin          
+    cmp  edx, ebx    
+    jg   updateMax          
+    jmp  Next  
+
+updateMin:
+    mov  eax, edx         
+    jmp  Next
+
+updateMax:
+    mov  ebx, edx         
+
+Next:
+    add  esi, 4      
+    loop L1    
+
+    call crlf
+    mov  edx, OFFSET prompt1
+    call writestring
+    mov  eax, eax         
+    call writedec
+
+    call crlf
+    mov  edx, OFFSET prompt2
+    call writestring
+    mov  eax, ebx         
+    call writedec
+
+    popad
+    pop  ebp
+    ret 8
+MinMaxArray ENDP
+
+END main
